@@ -1,0 +1,9 @@
+{
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "files.associations": {
+        "cmath": "cpp",
+        "ostream": "cpp",
+        "tuple": "cpp",
+        "array": "cpp"
+    }
+}
