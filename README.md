@@ -3,13 +3,13 @@
 
 ### Bezier曲线绘制
 1. VTNB初始化:
-$R[0].V=P[0] \\
+$$R[0].V=P[0] \\
 R[0].T=P[1]-P[0] \\
 R[0].N=(0,0,1)\times R[0].T \\
-R[0].B=R[0].T\times R[0].N$
+R[0].B=R[0].T\times R[0].N$$
 
 1. 递推公式:
-$\begin{aligned}
+$$\begin{aligned}
 R[t].V&=[P_1,P_2,P_3,P_4]\cdot M_{BEZ}\cdot T \\
 &=[P_1,P_2,P_3,P_4]\cdot\begin{bmatrix}
     1 & -3 & 3 & -1 \\
@@ -22,8 +22,9 @@ R[t].V&=[P_1,P_2,P_3,P_4]\cdot M_{BEZ}\cdot T \\
     t^2 \\
     t^3
 \end{bmatrix}
-\end{aligned}$
-$\begin{aligned}
+\end{aligned}$$
+
+$$\begin{aligned}
 R[t].T&=(R[t].V)'=[P_1,P_2,P_3,P_4]\cdot M_{BEZ}\cdot T' \\
 &=[P_1,P_2,P_3,P_4]\cdot\begin{bmatrix}
     1 & -3 & 3 & -1 \\
@@ -36,9 +37,10 @@ R[t].T&=(R[t].V)'=[P_1,P_2,P_3,P_4]\cdot M_{BEZ}\cdot T' \\
     2t \\
     3t^2
 \end{bmatrix}
-\end{aligned}$
-$R[t].N=R[t-1].B\times R[t].T \\
-R[t].B=R[t].T\times R[t].N$
+\end{aligned}$$
+
+$$R[t].N=R[t-1].B\times R[t].T \\
+R[t].B=R[t].T\times R[t].N$$
 
 ```cpp
 Curve evalBezier(const vector<Vector3f> &P, unsigned steps)
@@ -80,13 +82,13 @@ Curve evalBezier(const vector<Vector3f> &P, unsigned steps)
 
 ### Bspline曲线绘制
 1. VTNB初始化:
-$R[0].V=(P_0+4P_1+P_2)/6 \\
+$$R[0].V=(P_0+4P_1+P_2)/6 \\
 R[0].T=(P_2-P_0)/\|P_2-P_0\| \\
 R[0].N=(0,0,1)\times R[0].T \\
-R[0].B=R[0].T\times R[0].N$
+R[0].B=R[0].T\times R[0].N$$
 
 2. 递推公式:
-$\begin{aligned}
+$$\begin{aligned}
 R[t].V&=[P_{t-1},P_t,P_{t+1},P_{t+2}]\cdot M_{BSP}\cdot T \\
 &=[P_{t-1},P_t,P_{t+1},P_{t+2}]\cdot\begin{bmatrix}
     1 & -3 & 3 & -1 \\
@@ -99,8 +101,9 @@ R[t].V&=[P_{t-1},P_t,P_{t+1},P_{t+2}]\cdot M_{BSP}\cdot T \\
     t^2 \\
     t^3
 \end{bmatrix}
-\end{aligned}$
-$\begin{aligned}
+\end{aligned}$$
+
+$$\begin{aligned}
 R[t].T&=(R[t].V)'=[P_{t-1},P_t,P_{t+1},P_{t+2}]\cdot M_{BSP}\cdot T' \\
 &=[P_{t-1},P_t,P_{t+1},P_{t+2}]\cdot\begin{bmatrix}
     1 & -3 & 3 & -1 \\
@@ -113,9 +116,9 @@ R[t].T&=(R[t].V)'=[P_{t-1},P_t,P_{t+1},P_{t+2}]\cdot M_{BSP}\cdot T' \\
     2t \\
     3t^2
 \end{bmatrix}
-\end{aligned}$
-$R[t].N=R[t-1].B\times R[t].T \\
-R[t].B=R[t].T\times R[t].N$
+\end{aligned}$$
+$$R[t].N=R[t-1].B\times R[t].T \\
+R[t].B=R[t].T\times R[t].N$$
 
 ```cpp
 Curve evalBspline(const vector<Vector3f> &P, unsigned steps)
@@ -165,13 +168,14 @@ Curve evalBspline(const vector<Vector3f> &P, unsigned steps)
 
 ### 旋转曲面绘制
 
-$P'=M\times P
+$$P'=M\times P
 =\begin{bmatrix}
 \cos\theta & 0 & \sin\theta & 0 \\
 0 & 1 & 0 & 0 \\
 -\sin\theta & 0 & \cos\theta & 0 \\
 0 & 0 & 0 & 1
-\end{bmatrix}\times P$
+\end{bmatrix}\times P$$  
+
 $N'=(M^{-1})^T\times N=M\times N$
 
 ```cpp
@@ -205,12 +209,13 @@ Surface makeSurfRev(const Curve &profile, unsigned steps)
 
 ### ⼴义圆柱体绘制
 
-$P'=M\times P
+$$P'=M\times P
 =\begin{bmatrix}
 N & B & T & V \\
 0 & 0 & 0 & 1
-\end{bmatrix}\times P$
-$N'=(M^{-1})^T\times N$
+\end{bmatrix}\times P$$
+
+$$N'=(M^{-1})^T\times N$$
 
 
 > 曲⾯的闭合问题
